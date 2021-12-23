@@ -3,7 +3,7 @@ from datetime import datetime
 sBotName = "SmartBot"
 sYourName = "someone"
 sTextInput = ""
-now = datetime.now()
+
 
 
 # this is a special object called a dictionary. Dictionaries in Python work kind of like a dictionary would in real life -
@@ -27,15 +27,28 @@ print("Ok, let's have some fun together. I'll ask you what you want and will kee
 # when we write ==, it means to check if something is equal, not the same as just =, that sets something to that value
 # when we write !=, that means to check if something is NOT EQUAL. The exclamation (!) means NOT.
 while sTextInput != "exit":
-	print("(you can say solve for math equations, say name for your name, change name to change the bot name, bot name to see bot name, and to see time say time)")
+	print("(you can say \"solve\" for math equations, say \"name\" for your name, say \"change name\'' to change the bot name, \"bot name\" to see bot name, to see time say \"time\", and to see time till new year say \''new year\'')")
 	sTextInput = input("What would you like?: ").lower()
 	
+#DO !=-1 IF DOING .FIND!!!
 	if(dictKnowledge.get(sTextInput,False) != False):
 		print("Oh, I know what to do with that input.\n%s" % dictKnowledge[sTextInput])
 	elif( sTextInput == "what is your name" or sTextInput == "what's your name" or sTextInput == "whats your name" or sTextInput == "bot name"):
 		print ("My name is %s" % sBotName)
+	elif(sTextInput.find("new year")!=-1):
+		sNewyear = "22/01/01"
+		oNewyear = datetime.strptime(sNewyear, '%y/%m/%d')
+		now = datetime.now()
+		deltatime = oNewyear - now
+		print("Time left to new year: %s." % deltatime)
 	elif(sTextInput.find ("time")!=-1):
-		print ("the current time is", now)
+		now = datetime.now()
+		sTime = now.strftime("%Y/%m/%d %I:%M:%S %p")
+		print ("the current time is ", sTime)
+	elif(sTextInput.find("hi")!=-1):
+		print ("hiii!")
+
+	
 
 	elif(sTextInput.find("change") != -1 and sTextInput.find("name") != -1):		
 		sBotNewName = ""
@@ -76,4 +89,3 @@ while sTextInput != "exit":
 
 # all done, let's just be nice and say goodbye'
 print("Goodbye! I'll miss you, %s." % sYourName.capitalize())
-	
